@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>TaskForge</h1>
+  <p>Welcome to Best IT Task Manager Ever!</p>
+  <h2>Dynamic content</h2>
+  <ul>
+      <li><strong>Tasks:</strong> {{ tasks }}</li>
+      <li><strong>Workers:</strong> {{ workers }}</li>
+      <li><strong>Nearest deadline:</strong> - </li>
+  </ul>
+{% endblock %}
+

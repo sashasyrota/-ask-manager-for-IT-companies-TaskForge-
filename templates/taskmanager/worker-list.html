@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Current Workers Overview</h1>
+  <h2>Total: {{ workers.count }}</h2>
+
+  <h1>
+    Workers List
+    <a href=# class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  {#{% include 'includes/search_form.html' %}#}
+  {% if workers %}
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Position</th>
+      <th>Username</th>
+      <th>First name</th>
+      <th>Last name</th>
+    </tr>
+    {% for worker in workers %}
+    <tr>
+      <td>{{ worker.id }}</td>
+      <td>{{ worker.position.name }}</td>
+      <td><a href="{% url 'taskmanager:worker-detail' pk=worker.id %}">{{ worker.username }}</a></td>
+      <td>{{ worker.first_name }}</td>
+      <td>{{ worker.last_name }}</td>
+    </tr>
+      </table>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

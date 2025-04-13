@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Current Tasks Types Overview</h1>
+  <h2>Total: {{ task_types.count }}</h2>
+
+  <h1>
+    Task Type List
+    <a href=# class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  {#{% include 'includes/search_form.html' %}#}
+  {% if task_types %}
+    {% for task_type in task_types %}
+      <li><a href="{% url 'taskmanager:tasktype-detail' pk=task_type.id %}">{{ task_type.name }}</a></li>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

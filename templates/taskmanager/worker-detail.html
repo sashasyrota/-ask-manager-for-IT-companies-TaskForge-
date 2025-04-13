@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ worker.username }}
+
+  </h1>
+  <p>Position: {{ worker.position.name }}</p>
+  <p>First name: {{ worker.first_name }}</p>
+  <p>Last name: {{ worker.last_name }}</p>
+  <p>Username: {{ worker.username }}</p>
+  <p>Password: {{ worker.password }}</p>
+  <p>Email: {{ worker.email }}</p>
+
+  <hr>
+
+  {% if worker.tasks %}
+    <ul>
+      {% for task in worker.tasks.all  %}
+          <li>{{ task.name }} {{ task.type }} {{ task.priority }}</li>
+          {% if task.deadline %}
+            Deadline: {{ task.deadline|date:"d.m.Y" }}
+          {% else %}
+            Дата не вказана
+          {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Current Positions Overview</h1>
+  <h2>Total: {{ positions.count }}</h2>
+
+  <h1>
+    Position List
+    <a href=# class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+  {#{% include 'includes/search_form.html' %}#}
+  {% if positions %}
+    {% for position in positions %}
+      <li><a href="{% url 'taskmanager:position-detail' pk=position.id %}">{{ position.name }}</a></li>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

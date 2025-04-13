@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load tz %}
+{% block content %}
+  <h1>Current Tasks Overview</h1>
+  <h2>Total: {{ tasks.count }}</h2>
+
+  <h1>
+    Task List
+    <a class="btn btn-primary link-to-page" href={% url 'taskmanager:task-create' %}  >
+      Create
+    </a>
+  </h1>
+  {#{% include 'includes/search_form.html' %}#}
+  {% if tasks %}
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Is complete</th>
+      <th>Priority</th>
+      <th>Task type</th>
+    </tr>
+    {% for task in tasks %}
+      <tr>
+        <td>{{ task.id }}</td>
+        <td><a href="{% url 'taskmanager:task-detail' pk=task.id %}">{{ task.name }}</a></td>
+        <td>{{ task.deadline|timezone:"Europe/Kiev"|date:"d.m.Y H:i" }}</td>
+        <td>{{ task.is_complete }}</td>
+        <td>{{ task.priority }}</td>
+        <td>{{ task.task_type.name }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+{% endblock %}
