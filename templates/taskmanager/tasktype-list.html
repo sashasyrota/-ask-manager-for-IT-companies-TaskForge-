@@ -3,10 +3,10 @@
 {% block content %}
   <h1>Current Tasks Types Overview</h1>
   <h2>Total: {{ task_types.count }}</h2>
-
+  {% include 'includes/search_form.html' %}
   <h1>
     Task Type List
-    <a href=# class="btn btn-primary link-to-page">
+    <a class="btn btn-primary link-to-page" href={% url 'taskmanager:tasktype-create' %}>
       Create
     </a>
   </h1>

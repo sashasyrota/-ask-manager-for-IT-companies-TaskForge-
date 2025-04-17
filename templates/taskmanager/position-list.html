@@ -3,10 +3,10 @@
 {% block content %}
   <h1>Current Positions Overview</h1>
   <h2>Total: {{ positions.count }}</h2>
-
+  {% include 'includes/search_form.html' %}
   <h1>
     Position List
-    <a href=# class="btn btn-primary link-to-page">
+    <a class="btn btn-primary link-to-page" href={% url 'taskmanager:position-create' %}>
       Create
     </a>
   </h1>

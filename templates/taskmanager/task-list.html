@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Current Tasks Overview</h1>
   <h2>Total: {{ tasks.count }}</h2>
-
+  {% include 'includes/search_form.html' %}
   <h1>
     Task List
     <a class="btn btn-primary link-to-page" href={% url 'taskmanager:task-create' %}  >

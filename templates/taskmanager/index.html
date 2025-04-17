@@ -5,9 +5,9 @@
   <p>Welcome to Best IT Task Manager Ever!</p>
   <h2>Dynamic content</h2>
   <ul>
-      <li><strong>Tasks:</strong> {{ tasks }}</li>
-      <li><strong>Workers:</strong> {{ workers }}</li>
-      <li><strong>Nearest deadline:</strong> - </li>
+      <li><strong>Tasks:</strong> {{ tasks.count }}</li>
+      <li><strong>Workers:</strong> {{ workers.count }}</li>
+      <li><strong>Nearest deadline:</strong> <a href={% url 'taskmanager:task-detail' nearest_deadline.id %}>{{ nearest_deadline.deadline }}</a></li>
   </ul>
 {% endblock %}
 
