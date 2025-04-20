@@ -1,36 +1,60 @@
-{% extends "base.html" %}
-{% load tz %}
+{% extends "layouts/base.html" %}
+{% load tz static %}
+
+{% block title %}Task list{% endblock title%}
 {% block content %}
-  <h1>Current Tasks Overview</h1>
-  <h2>Total: {{ tasks.count }}</h2>
-  {% include 'includes/search_form.html' %}
-  <h1>
-    Task List
-    <a class="btn btn-primary link-to-page" href={% url 'taskmanager:task-create' %}  >
-      Create
-    </a>
-  </h1>
-  {#{% include 'includes/search_form.html' %}#}
-  {% if tasks %}
-  <table class="table">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Deadline</th>
-      <th>Is complete</th>
-      <th>Priority</th>
-      <th>Task type</th>
-    </tr>
-    {% for task in tasks %}
-      <tr>
-        <td>{{ task.id }}</td>
-        <td><a href="{% url 'taskmanager:task-detail' pk=task.id %}">{{ task.name }}</a></td>
-        <td>{{ task.deadline|timezone:"Europe/Kiev"|date:"d.m.Y H:i" }}</td>
-        <td>{{ task.is_complete }}</td>
-        <td>{{ task.priority }}</td>
-        <td>{{ task.task_type.name }}</td>
-      </tr>
-    {% endfor %}
-  </table>
-  {% endif %}
+  <div class="pc-container">
+    <div class="pc-content">
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h5 class="mb-0">Home</h5>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <ul class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href={% url 'taskmanager:index' %}>Home</a></li>
+                <li class="breadcrumb-item"><a href={% url 'taskmanager:task-list' %}>Task list</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h1>Current Tasks Overview</h1>
+      <h2>Total: {{ tasks.count }}</h2>
+      {% include 'includes/search_form.html' %}
+      <h1>
+        Task List
+        <a class="btn btn-primary link-to-page" href={% url 'taskmanager:task-create' %}  >
+          Create
+        </a>
+      </h1>
+      {#{% include 'includes/search_form.html' %}#}
+      {% if tasks %}
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Deadline</th>
+          <th>Is complete</th>
+          <th>Priority</th>
+          <th>Task type</th>
+        </tr>
+        {% for task in tasks %}
+          <tr>
+            <td>{{ task.id }}</td>
+            <td><a href="{% url 'taskmanager:task-detail' pk=task.id %}">{{ task.name }}</a></td>
+            <td>{{ task.deadline|timezone:"Europe/Kiev"|date:"d.m.Y H:i" }}</td>
+            <td>{{ task.is_complete }}</td>
+            <td>{{ task.priority }}</td>
+            <td>{{ task.task_type.name }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}

@@ -13,7 +13,9 @@ from taskmanager.models import Task, Worker, TaskType, Position
 def index(request) -> HttpResponse:
     context = {
         'tasks': Task.objects,
+        'tasktypes': TaskType.objects,
         'workers': Worker.objects,
+        'positions': Position.objects,
         'nearest_deadline': Task.objects.order_by('deadline')[0],
     }
     return render(request, "taskmanager/index.html", context=context)
