@@ -1,5 +1,6 @@
 from asyncio import tasks
 
+from django.contrib.auth.views import PasswordChangeDoneView
 from django.urls import path
 
 from taskmanager.views import (
@@ -16,11 +17,18 @@ from taskmanager.views import (
     TaskUpdateView,
     TaskDeleteView,
     ToggleTaskAssignView, WorkerCreateView, WorkerUpdateView, WorkerDeleteView, TaskTypeCreateView, TaskTypeUpdateView,
-    TaskTypeDeleteView, PositionCreateView, PositionUpdateView, PositionDeleteView
+    TaskTypeDeleteView, PositionCreateView, PositionUpdateView, PositionDeleteView, UserLoginView, logout_view,
+    UserPasswordChangeView
 )
 
 urlpatterns = [
     path("", index, name="index"),
+    path('accounts/login/', UserLoginView.as_view(), name='login'),
+    path('accounts/logout/', logout_view, name='logout'),
+    path('accounts/password-change/', UserPasswordChangeView.as_view(), name='password_change'),
+    path('accounts/password-change-done/', PasswordChangeDoneView.as_view(
+        template_name='registration/password_change_done.html'
+    ), name="password_change_done"),
     path("tasks/", TaskListView.as_view(), name="task-list"),
     path("tasks/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path("tasks/create/", TaskCreateView.as_view(), name="task-create"),

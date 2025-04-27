@@ -1,9 +1,9 @@
-{% load i18n static admin_datta %}
+{% load i18n static %}
 
 <nav class="pc-sidebar">
   <div class="navbar-wrapper">
     <div class="m-header">
-      <a href=# class="b-brand text-primary">
+      <a class="b-brand text-primary" href={% url 'taskmanager:index' %}>
         <!-- ========   Change your logo from here   ============ -->
         <img src="{% static 'assets/images/logo-pc.svg' %}" class="img-fluid" alt="logo">
       </a>
@@ -17,11 +17,11 @@
         <label>ADMIN</label>
       </li>
       <li class="pc-item">
-        <a href="{% url "admin:index" %}" class="pc-link">
+        <a href="{% url "taskmanager:worker-detail" user.id %}" class="pc-link">
           <span class="pc-micon">
             <i data-feather="settings"></i>
           </span>
-          <span class="pc-mtext">Superuser UI</span>
+          <span class="pc-mtext">{{ user.username }}</span>
         </a>
       </li>
 
@@ -32,7 +32,7 @@
           <label>Categories</label>
         </li>
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a class="pc-link" href= {% url 'taskmanager:index' %}>
             <span class="pc-micon">
               <i data-feather="home"></i>
             </span>
@@ -40,15 +40,15 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a class="pc-link" href= {% url 'taskmanager:tasktype-list' %}>
             <span class="pc-micon">
               <i data-feather="archive"></i>
             </span>
-            <span class="pc-mtext">Task Types</span>
+            <span class="pc-mtext">Task types</span>
           </a>
         </li>
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a class="pc-link" href= {% url 'taskmanager:position-list' %}>
             <span class="pc-micon">
               <i data-feather="table"></i>
             </span>
@@ -56,7 +56,7 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a class="pc-link" href= {% url 'taskmanager:worker-list' %}>
             <span class="pc-micon">
               <i data-feather="monitor"></i>
             </span>
@@ -64,7 +64,7 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a class="pc-link" href= {% url 'taskmanager:task-list' %}>
             <span class="pc-micon">
               <i data-feather="bar-chart"></i>
             </span>
@@ -75,20 +75,14 @@
 
         {% if not request.user.is_authenticated %}
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a href={% url 'taskmanager:login' %} class="pc-link">
             <span class="pc-micon"><i data-feather="lock"></i></span>
             <span class="pc-mtext">Login</span>
           </a>
         </li>
-        <li class="pc-item">
-          <a href=# class="pc-link">
-            <span class="pc-micon"><i data-feather="user-plus"></i></span>
-            <span class="pc-mtext">Register</span>
-          </a>
-        </li>
         {% else %}
         <li class="pc-item">
-          <a href=# class="pc-link">
+          <a href={% url 'taskmanager:logout' %} class="pc-link">
             <span class="pc-micon">
               <svg class="pc-icon me-2">
                 <use xlink:href="#custom-logout-1-outline"></use>

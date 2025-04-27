@@ -311,9 +311,10 @@ for (var t = 0; t < tc.length; t++) {
 }
 
 // authentication logo
+var faviconPath = document.body.getAttribute('data-favicon-url')
 var tc = document.querySelectorAll('.auth-main.v2 .img-brand');
 for (var t = 0; t < tc.length; t++) {
-  tc[t].setAttribute('src', '../assets/images/logo-white.svg');
+  tc[t].setAttribute('src', faviconPath);
 }
 
 // =======================================================
@@ -492,10 +493,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function layout_theme_sidebar_change(value) {
+  var faviconPath = document.body.getAttribute('data-favicon-url')
   if (value == 'true') {
     document.getElementsByTagName('body')[0].setAttribute('data-pc-sidebar_theme', 'true');
     if (document.querySelector('.pc-sidebar .m-header .logo-lg')) {
-      document.querySelector('.pc-sidebar .m-header .logo-lg').setAttribute('src', '../assets/images/logo-dark.svg');
+      document.querySelector('.pc-sidebar .m-header .logo-lg').setAttribute('src', faviconPath);
     }
     var control = document.querySelector('.sidebar-theme .btn.active');
     if (control) {
@@ -505,7 +507,7 @@ function layout_theme_sidebar_change(value) {
   } else {
     document.getElementsByTagName('body')[0].setAttribute('data-pc-sidebar_theme', 'false');
     if (document.querySelector('.pc-sidebar .m-header .logo-lg')) {
-      document.querySelector('.pc-sidebar .m-header .logo-lg').setAttribute('src', '../assets/images/logo-white.svg');
+      document.querySelector('.pc-sidebar .m-header .logo-lg').setAttribute('src', faviconPath);
     }
     var control = document.querySelector('.sidebar-theme .btn.active');
     if (control) {
@@ -630,13 +632,13 @@ function layout_change(layout) {
   if (layout == 'dark') {
     dark_flag = true;
     if (document.querySelector('.footer-top .footer-logo')) {
-      document.querySelector('.footer-top .footer-logo').setAttribute('src', '../assets/images/logo-white.svg');
+      document.querySelector('.footer-top .footer-logo').setAttribute('src', faviconPath);
     }
     if (document.querySelector('[data-pc-layout="horizontal"] .pc-sidebar .m-header .logo-lg')) {
-      document.querySelector('[data-pc-layout="horizontal"] .pc-sidebar .m-header .logo-lg').setAttribute('src', '../assets/images/logo-white.svg');
+      document.querySelector('[data-pc-layout="horizontal"] .pc-sidebar .m-header .logo-lg').setAttribute('src', '../assets/images/favicon.svg');
     }
     if (document.querySelector('.auth-wrapper a>img')) {
-      document.querySelector('.auth-wrapper a>img').setAttribute('src', '../assets/images/logo-white.svg');
+      document.querySelector('.auth-wrapper a>img').setAttribute('src', faviconPath);
     }
     var control = document.querySelector('.theme-layout .btn.active');
     if (control) {
@@ -646,13 +648,13 @@ function layout_change(layout) {
   } else {
     dark_flag = false;
     if (document.querySelector('.footer-top .footer-logo')) {
-      document.querySelector('.footer-top .footer-logo').setAttribute('src', '../assets/images/logo-dark.svg');
+      document.querySelector('.footer-top .footer-logo').setAttribute('src', faviconPath);
     }
     if (document.querySelector('.auth-wrapper a>img')) {
-      document.querySelector('.auth-wrapper a>img').setAttribute('src', '../assets/images/logo-dark.svg');
+      document.querySelector('.auth-wrapper a>img').setAttribute('src', faviconPath);
     }
     if (document.querySelector('[data-pc-layout="horizontal"] .pc-sidebar .m-header .logo-lg')) {
-      document.querySelector('[data-pc-layout="horizontal"] .pc-sidebar .m-header .logo-lg').setAttribute('src', '../assets/images/logo-dark.svg');
+      document.querySelector('[data-pc-layout="horizontal"] .pc-sidebar .m-header .logo-lg').setAttribute('src', faviconPath);
     }
     var control = document.querySelector('.theme-layout .btn.active');
     if (control) {

@@ -11,5 +11,5 @@ def query_transform(request, **kwargs):
         if value is not None:
             updated[key] = value
         else:
-            del updated[key]
+            updated.pop(key, None)
     return updated.urlencode()

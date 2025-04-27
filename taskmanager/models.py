@@ -30,11 +30,14 @@ class Worker(AbstractUser):
     def get_absolute_url(self):
         return reverse("taskmanager:worker-detail", kwargs={"pk": self.pk})
 
+    def __str__(self):
+        return f"{self.username} ({self.pk})"
+
 
 class Task(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    deadline = models.DateTimeField()
+    deadline = models.DateTimeField(null=True, blank=True)
     is_complete = models.BooleanField(default=False)
     priority = models.CharField(
         max_length=10,
@@ -43,3 +46,9 @@ class Task(models.Model):
     )
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE, related_name='tasks')
     assignees = models.ManyToManyField(Worker, related_name='tasks')
+
+    class Meta:
+        ordering = ['deadline']
+
+    def __str__(self):
+        return self.name
