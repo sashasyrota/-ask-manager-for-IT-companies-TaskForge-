@@ -29,7 +29,7 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-between my-4">
-            {% include "includes/search_sort_form.html" %}
+            {% include "includes/search_form.html" %}
             <h5>Total workers: {{ workers_count }}</h5>
           </div>
           <form method="get" action="{% url 'taskmanager:worker-create' %}">

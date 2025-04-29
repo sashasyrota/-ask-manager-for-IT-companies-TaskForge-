@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('taskmanager', '0006_alter_task_deadline'),
+        ("taskmanager", "0006_alter_task_deadline"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='task',
-            options={'ordering': ['deadline']},
+            name="task",
+            options={"ordering": ["deadline"]},
         ),
     ]

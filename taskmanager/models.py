@@ -11,10 +11,10 @@ class TaskType(models.Model):
 
 
 class Priority(models.TextChoices):
-    URGENT = 'urgent', 'URGENT'
-    HIGH = 'high', 'HIGH'
-    NORMAL = 'normal', 'NORMAL'
-    LOW = 'low', 'LOW'
+    URGENT = "urgent", "URGENT"
+    HIGH = "high", "HIGH"
+    NORMAL = "normal", "NORMAL"
+    LOW = "low", "LOW"
 
 
 class Position(models.Model):
@@ -25,7 +25,9 @@ class Position(models.Model):
 
 
 class Worker(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.CASCADE, related_name='workers', null=True)
+    position = models.ForeignKey(
+        Position, on_delete=models.CASCADE, related_name="workers", null=True
+    )
 
     def get_absolute_url(self):
         return reverse("taskmanager:worker-detail", kwargs={"pk": self.pk})
@@ -44,11 +46,13 @@ class Task(models.Model):
         choices=Priority.choices,
         default=Priority.NORMAL,
     )
-    task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE, related_name='tasks')
-    assignees = models.ManyToManyField(Worker, related_name='tasks')
+    task_type = models.ForeignKey(
+        TaskType, on_delete=models.CASCADE, related_name="tasks"
+    )
+    assignees = models.ManyToManyField(Worker, related_name="tasks")
 
     class Meta:
-        ordering = ['deadline']
+        ordering = ["deadline"]
 
     def __str__(self):
         return self.name

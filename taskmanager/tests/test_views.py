@@ -7,15 +7,9 @@ from taskmanager.models import Position, Task, Worker, TaskType
 
 class TestPositionViews(TestCase):
     def setUp(self):
-        self.position = Position.objects.create(
-            name="TestName1"
-        )
-        self.position = Position.objects.create(
-            name="TestName2"
-        )
-        self.position = Position.objects.create(
-            name="TestName3"
-        )
+        self.position = Position.objects.create(name="TestName1")
+        self.position = Position.objects.create(name="TestName2")
+        self.position = Position.objects.create(name="TestName3")
         self.user = get_user_model().objects.create_user(
             username="TestUser",
             password="<PASSWORD>",
@@ -58,9 +52,7 @@ class TestPositionViews(TestCase):
 
 class TestWorkerLoginRequiredViews(TestCase):
     def setUp(self):
-        self.position = Position.objects.create(
-            name="TestName1"
-        )
+        self.position = Position.objects.create(name="TestName1")
 
         self.worker1 = Worker.objects.create_user(
             first_name="Test Worker1",
@@ -78,15 +70,17 @@ class TestWorkerLoginRequiredViews(TestCase):
         self.urls = {
             "list": reverse("taskmanager:worker-list"),
             "create": reverse("taskmanager:worker-create"),
-            "update":
-                reverse("taskmanager:worker-update", kwargs={"pk": self.worker1.pk}),
-            "delete":
-                reverse("taskmanager:worker-delete", kwargs={"pk": self.worker1.pk}),
-            "detail":
-                reverse("taskmanager:worker-detail", kwargs={"pk": self.worker1.pk}),
-            "assign":
-                reverse(
-                    "taskmanager:toggle-task-assign", kwargs={"pk": self.worker1.pk}
+            "update": reverse(
+                "taskmanager:worker-update", kwargs={"pk": self.worker1.pk}
+            ),
+            "delete": reverse(
+                "taskmanager:worker-delete", kwargs={"pk": self.worker1.pk}
+            ),
+            "detail": reverse(
+                "taskmanager:worker-detail", kwargs={"pk": self.worker1.pk}
+            ),
+            "assign": reverse(
+                "taskmanager:toggle-task-assign", kwargs={"pk": self.worker1.pk}
             ),
         }
 
@@ -115,9 +109,7 @@ class TestWorkerLoginRequiredViews(TestCase):
 
 class TestTaskLoginRequiredViews(TestCase):
     def setUp(self):
-        self.position = Position.objects.create(
-            name="TestName1"
-        )
+        self.position = Position.objects.create(name="TestName1")
 
         self.tasktype = TaskType.objects.create(name="TestTaskType")
 
@@ -144,12 +136,8 @@ class TestTaskLoginRequiredViews(TestCase):
         self.urls = {
             "list": reverse("taskmanager:task-list"),
             "create": reverse("taskmanager:task-create"),
-            "update": reverse(
-                "taskmanager:task-update", kwargs={"pk": self.task1.pk}
-            ),
-            "delete": reverse(
-                "taskmanager:task-delete", kwargs={"pk": self.task1.pk}
-            ),
+            "update": reverse("taskmanager:task-update", kwargs={"pk": self.task1.pk}),
+            "delete": reverse("taskmanager:task-delete", kwargs={"pk": self.task1.pk}),
         }
 
     def test_login_required_task(self):
@@ -181,9 +169,7 @@ class TestTaskTypeLoginRequiredViews(TestCase):
 
         self.tasktype2 = TaskType.objects.create(name="TestTaskType2")
 
-        self.position = Position.objects.create(
-            name="TestName1"
-        )
+        self.position = Position.objects.create(name="TestName1")
 
         self.user = get_user_model().objects.create_user(
             username="TestUser",

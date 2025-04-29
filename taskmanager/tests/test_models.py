@@ -28,10 +28,7 @@ class TestModel(TestCase):
         self.assertEqual(str(self.position), "TestName")
 
     def test_worker_str(self):
-        self.assertEqual(
-            str(self.worker),
-            "TestUsername (1)"
-        )
+        self.assertEqual(str(self.worker), "TestUsername (1)")
 
     def test_task_str(self):
         self.assertEqual(str(self.task), "TestName")

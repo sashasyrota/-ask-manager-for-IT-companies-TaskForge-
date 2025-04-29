@@ -11,9 +11,7 @@ class TestAdmin(TestCase):
         self.client = Client()
         self.position = Position.objects.create(name="test_position")
         self.admin_user = get_user_model().objects.create_superuser(
-            username="admin",
-            password="<PASSWORD>",
-            position=self.position,
+            username="admin", password="<PASSWORD>", position=self.position
         )
         self.client.force_login(self.admin_user)
 
