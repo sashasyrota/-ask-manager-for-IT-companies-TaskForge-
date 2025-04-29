@@ -1,0 +1,10 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Монітор -->
+  <rect x="20" y="20" width="80" height="50" rx="6" fill="#2196F3" stroke="#1E88E5" stroke-width="2"/>
+  <!-- Екран -->
+  <rect x="25" y="25" width="70" height="40" rx="3" fill="#E3F2FD"/>
+  <!-- Підставка -->
+  <rect x="55" y="70" width="10" height="10" fill="#1976D2"/>
+  <!-- База -->
+  <rect x="40" y="85" width="40" height="5" rx="2" fill="#1565C0"/>
+</svg>

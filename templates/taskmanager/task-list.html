@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% load query_transform %}
+{% load tz static %}
+
+{% block title %}Task list{% endblock title %}
+{% block content %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h5 class="mb-0">Task list</h5>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:index' %}>Home</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:task-list' %}>Task list</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {#  ?{% query_transform request sort_by=sort_form.sort_by.value %}#}
+  <div class="row">
+    <!-- [ Typography ] start -->
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between my-4">
+            {% include "includes/search_form.html" %}
+            <h5>Total tasks: {{ tasks_count }}</h5>
+          </div>
+          <form method="get" action="{% url 'taskmanager:task-create' %}">
+            <button type="submit" class="btn btn-success">Add task</button>
+          </form>
+          <div class="card-body">
+            <div class="dt-responsive table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr class="unread border-bottom-info">
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Deadline</th>
+                  <th>Is complete</th>
+                  <th>Priority</th>
+                  <th>Task type</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for task in tasks %}
+                  <tr>
+                    <td>{{ task.id }}</td>
+                    <td><a href="{% url 'taskmanager:task-detail' pk=task.id %}">{{ task.name }}</a></td>
+                    <td>{{ task.deadline|timezone:"Europe/Kiev"|date:"d.m.Y H:i" }}</td>
+                    <td>{{ task.is_complete }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.task_type.name }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

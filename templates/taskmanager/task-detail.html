@@ -1,0 +1,89 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load tz static %}
+
+{% block title %}Task detail{% endblock title %}
+{% block content %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h5 class="mb-0">Task detail</h5>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:index' %}>Home</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:task-list' %}>Task list</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:task-detail' pk=task.id %}>Task detail</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- [ Typography ] start -->
+    <div class="col-sm-12">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3 class="mb-0">
+              {{ task.name }}
+            </h3>
+            <div>
+              <a href="{% url 'taskmanager:task-update' pk=task.id %}"
+                 class="btn btn-outline-secondary btn-sm me-2">
+                <i class="bi bi-pencil-square"></i> Update
+              </a>
+              <a href="{% url 'taskmanager:task-delete' pk=task.id %}" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i> Delete
+              </a>
+            </div>
+          </div>
+
+          <p><strong>Description:</strong> {{ task.description }}</p>
+          <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+          <p><strong>Is complete:</strong>
+            {% if task.is_complete %}
+              <span class="badge bg-success">Yes</span>
+            {% else %}
+              <span class="badge bg-secondary">No</span>
+            {% endif %}
+          </p>
+          <p><strong>Priority:</strong> {{ task.priority }}</p>
+          <p><strong>Task Type:</strong> {{ task.task_type.name }}</p>
+
+          <div class="mb-3">
+            {% if task in user.tasks.all %}
+              <a href="{% url 'taskmanager:toggle-task-assign' pk=task.id %}" class="btn btn-outline-danger btn-sm">
+                Remove Me
+              </a>
+            {% else %}
+              <a href="{% url 'taskmanager:toggle-task-assign' pk=task.id %}"
+                 class="btn btn-outline-success btn-sm">
+                Assign Me
+              </a>
+            {% endif %}
+          </div>
+
+          <hr>
+          <h6>Assignees:</h6>
+          <ul class="list-unstyled">
+            {% for assignee in task.assignees.all %}
+              <li>
+                <i class="bi bi-person-circle me-2"></i>
+                {{ assignee.username }} — {{ assignee.first_name }} {{ assignee.last_name }}
+                <span class="text-muted">({{ assignee.position.name }})</span>
+              </li>
+            {% empty %}
+              <li class="text-muted">No assignees yet</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

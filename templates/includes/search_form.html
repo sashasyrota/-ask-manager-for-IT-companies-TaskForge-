@@ -1,0 +1,10 @@
+<form method="get" action="?" class="d-flex gap-2 mb-3 align-items-center">
+  {{ search_form.search }}
+  {{ sort_form.sort_by }}
+  {% for key, value in request.GET.items %}
+    {% if key not in "search sort_by" %}
+      <input type="hidden" name="{{ key }}" value="{{ value }}">
+    {% endif %}
+  {% endfor %}
+  <button type="submit" class="btn btn-primary">🔃</button>
+</form>

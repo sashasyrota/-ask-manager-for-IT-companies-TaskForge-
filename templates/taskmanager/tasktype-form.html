@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load tz static %}
+
+{% block title %}{{ object|yesno:"Update,Create" }} task type{% endblock title %}
+
+{% block content %}
+
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h5 class="mb-0">{{ object|yesno:"Update,Create" }} task type</h5>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{% url 'taskmanager:index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'taskmanager:tasktype-list' %}">Task type tist</a></li>
+            <li class="breadcrumb-item active">{{ object|yesno:"Update,Create" }} task type</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card shadow-lg mt-4">
+        <div class="card-body">
+          <!-- Заголовок та форма -->
+          <h3 class="mb-4 text-primary">{{ object|yesno:"Update,Create" }} task type</h3>
+
+          <form method="post" action="" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="form-label">Task type name</label>
+              <input type="text" name="name" class="form-control" id="name" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">{{ object|yesno:"Update,Create" }} task type</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
