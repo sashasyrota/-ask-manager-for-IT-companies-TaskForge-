@@ -1,0 +1,75 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load tz static %}
+
+{% block title %}Position detail{% endblock title %}
+{% block content %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h5 class="mb-0">Position detail</h5>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:index' %}>Home</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:position-list' %}>Position list</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:position-detail' pk=position.id %}>Position
+              detail</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    `
+    <div class="col-sm-12">
+      <div class="card shadow-lg mt-4">
+        <div class="card-body">
+          <!-- Заголовок і кнопки -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0 text-primary">
+              {{ position.name }}
+            </h3>
+            <div>
+              <a href="{% url 'taskmanager:position-update' pk=position.id %}"
+                 class="btn btn-outline-primary btn-sm me-2">
+                <i class="bi bi-pencil-square"></i> Update
+              </a>
+              <a href="{% url 'taskmanager:position-delete' pk=position.id %}"
+                 class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i> Delete
+              </a>
+            </div>
+          </div>
+
+          <!-- Список працівників -->
+          <h5 class="mb-3 text-secondary">👥 Workers of this position:</h5>
+          {% if position.workers.all %}
+            <ul class="list-group list-group-flush">
+              {% for worker in position.workers.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong class="text-dark">{{ worker.username }}</strong>
+                    <span class="badge bg-info text-dark ms-2">{{ worker.first_name }}</span>
+                    <span class="badge bg-secondary ms-1">{{ worker.last_name }}</span>
+                  </div>
+                  <a href="{% url 'taskmanager:worker-detail' pk=worker.id %}" class="btn btn-sm btn-outline-dark">
+                    View Profile
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No workers assigned to this position.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

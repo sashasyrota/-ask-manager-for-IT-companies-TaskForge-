@@ -1,0 +1,80 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load tz static %}
+
+{% block title %}Task type detail{% endblock title %}
+{% block content %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h5 class="mb-0">Task type detail</h5>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:index' %}>Home</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:tasktype-list' %}>Task type list</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:tasktype-detail' pk=task_type.id %}>Task type
+              detail</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card shadow-lg mt-4">
+        <div class="card-body">
+          <!-- Заголовок і кнопки -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="mb-0 text-primary">
+              {{ task_type.name }}
+            </h3>
+            <div>
+              <a href="{% url 'taskmanager:tasktype-update' pk=task_type.id %}"
+                 class="btn btn-outline-primary btn-sm me-2">
+                <i class="bi bi-pencil-square"></i> Update
+              </a>
+              <a href="{% url 'taskmanager:tasktype-delete' pk=task_type.id %}"
+                 class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i> Delete
+              </a>
+            </div>
+          </div>
+
+          <!-- Список задач -->
+          <h5 class="mb-3 text-secondary">📝 Tasks of this type:</h5>
+          {% if task_type.tasks.all %}
+            <ul class="list-group list-group-flush">
+              {% for task in task_type.tasks.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <div>
+                    <strong class="text-dark">{{ task.name }}</strong>
+                    {% if task.deadline %}
+                      <span class="badge bg-warning text-dark ms-2">
+                      🕒 {{ task.deadline|date:"d.m.Y H:i" }}
+                    </span>
+                    {% else %}
+                      <span class="badge bg-secondary text-light ms-2">No deadline</span>
+                    {% endif %}
+                    <span class="badge bg-info text-dark ms-1">{{ task.priority }}</span>
+                  </div>
+                  <a href="{% url 'taskmanager:task-detail' pk=task.id %}" class="btn btn-sm btn-outline-dark">
+                    View Task
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No tasks assigned to this type.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

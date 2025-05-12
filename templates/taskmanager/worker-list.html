@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load tz static %}
+
+{% block title %}Worker list{% endblock title %}
+{% block content %}
+  <div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h5 class="mb-0">Worker list</h5>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <ul class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:index' %}>Home</a></li>
+            <li class="breadcrumb-item"><a href={% url 'taskmanager:task-list' %}>Worker list</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- [ Typography ] start -->
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between my-4">
+            {% include "includes/search_form.html" %}
+            <h5>Total workers: {{ workers_count }}</h5>
+          </div>
+          <form method="get" action="{% url 'taskmanager:worker-create' %}">
+            <button type="submit" class="btn btn-success">Add worker</button>
+          </form>
+          <div class="card-body">
+            <div class="dt-responsive table-responsive">
+              <table class="table table-hover">
+                <thead>
+                <tr class="unread border-bottom-info">
+                  <th>ID</th>
+                  <th>Position</th>
+                  <th>Username</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                </tr>
+                </thead>
+                {% for worker in workers %}
+                  <tr>
+                    <td>{{ worker.id }}</td>
+                    <td>{{ worker.position.name }}</td>
+                    <td><a href="{% url 'taskmanager:worker-detail' pk=worker.id %}">{{ worker.username }}</a></td>
+                    <td>{{ worker.first_name }}</td>
+                    <td>{{ worker.last_name }}</td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
